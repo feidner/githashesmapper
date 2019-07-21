@@ -1,0 +1,63 @@
+{
+  "object_kind": "push",
+  "event_name": "push",
+  "before": "768b109afc290b10d7f7dc544b89cdf0ac0463c4",
+  "after": "462ab7b6facbc241a2759897086eec320d74895f",
+  "ref": "refs/heads/master",
+  "checkout_sha": "462ab7b6facbc241a2759897086eec320d74895f",
+  "message": null,
+  "user_id": 2924,
+  "user_name": "Fischer Bernhard z0006tox",
+  "user_username": "z0006tox",
+  "user_email": "bernhard.a.fischer@siemens.com",
+  "user_avatar": null,
+  "project_id": 62528,
+  "project": {
+    "id": 62528,
+    "name": "great",
+    "description": "",
+    "web_url": "https://code.siemens.com/itcfs4stfp-int.sfs/great",
+    "avatar_url": "https://code.siemens.com/uploads/-/system/project/avatar/62528/great.png",
+    "git_ssh_url": "git@code.siemens.com:itcfs4stfp-int.sfs/great.git",
+    "git_http_url": "https://code.siemens.com/itcfs4stfp-int.sfs/great.git",
+    "namespace": "itcfs4stfp-int.sfs",
+    "visibility_level": 0,
+    "path_with_namespace": "itcfs4stfp-int.sfs/great",
+    "default_branch": "master",
+    "ci_config_path": null,
+    "homepage": "https://code.siemens.com/itcfs4stfp-int.sfs/great",
+    "url": "git@code.siemens.com:itcfs4stfp-int.sfs/great.git",
+    "ssh_url": "git@code.siemens.com:itcfs4stfp-int.sfs/great.git",
+    "http_url": "https://code.siemens.com/itcfs4stfp-int.sfs/great.git"
+  },
+  "commits": [
+    {
+      "id": "462ab7b6facbc241a2759897086eec320d74895f",
+      "message": "Erweiterung der ARE um Division code\n",
+      "timestamp": "2019-07-18T13:29:04Z",
+      "url": "https://code.siemens.com/itcfs4stfp-int.sfs/great/commit/462ab7b6facbc241a2759897086eec320d74895f",
+      "author": {
+        "name": "Fischer Bernhard z0006tox",
+        "email": "Bernhard.A.Fischer@siemens.com"
+      },
+      "added": [],
+      "modified": [
+        "common/src/main/java/great/common/constants/Rights.java",
+        "common/src/main/resources/Berechtigungsmatrix.xls",
+        "ui-ulc/ui-ulc-server/src/main/java/great/client/ulc/masterdata/view/AreDetailPane.java"
+      ],
+      "removed": []
+    }
+  ],
+  "total_commits_count": 1,
+  "push_options": {},
+  "repository": {
+    "name": "great",
+    "url": "git@code.siemens.com:itcfs4stfp-int.sfs/great.git",
+    "description": "",
+    "homepage": "https://code.siemens.com/itcfs4stfp-int.sfs/great",
+    "git_http_url": "https://code.siemens.com/itcfs4stfp-int.sfs/great.git",
+    "git_ssh_url": "git@code.siemens.com:itcfs4stfp-int.sfs/great.git",
+    "visibility_level": 0
+  }
+}

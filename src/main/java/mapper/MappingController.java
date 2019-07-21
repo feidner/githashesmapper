@@ -1,9 +1,10 @@
 package mapper;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.http.HttpEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MappingController {

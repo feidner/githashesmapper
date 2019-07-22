@@ -1,26 +1,20 @@
 package mapper;
 
 import org.springframework.http.HttpEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MappingController {
 
-    public MappingController() {
-        super();
-    }
-
-    //@RequestMapping(value = {"/gitlab"}, method = RequestMethod.POST)
     @PostMapping(path= "/gitlab")
     public void gitData(HttpEntity<String> requestEntity) {
+        System.out.println("gitData");
         String gitLabJsonData = requestEntity.getBody();
     }
 
-    @RequestMapping({"/sequentialNumber/{hash}"})
+    @RequestMapping(value = {"/sequentialNumber/{hash}"}, method = RequestMethod.GET)
     public String squentialNumber(@PathVariable(value = "hash") String hash) {
+        System.out.println("squentialNumber");
         return "murks";
     }
 }

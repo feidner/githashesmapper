@@ -107,6 +107,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${version.maven.compiler.plugin}</version>
                     <configuration>
+                        <!-- nix -->
                         <source>${version.java.source}</source>
                         <target>${version.java.target}</target>
                         <encoding>${java.source.encoding}</encoding>

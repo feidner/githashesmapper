@@ -1,6 +1,5 @@
 package mapper;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -8,10 +7,7 @@ import org.springframework.http.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.client.Entity;
-import java.io.File;
 import java.io.IOException;
-import java.lang.annotation.Annotation;
-import java.nio.charset.Charset;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,10 +18,11 @@ class MappingControllerTest {
     @Inject
     private TestRestTemplate restTemplate;
 
+    private MapperService mapperService = new MapperService();
+
     @Test
-    void restController_SendGitLabJsonDataWithAfterHash_Then() {
-
-
+    void restController_SendGitLabJsonDataWithAfterHash_Then() throws IOException{
+        mapperService.clearFile();
         String gitLabPushEvent = "{" +
                 "  \"object_kind\": \"push\"," +
                 "  \"event_name\": \"push\"," +
@@ -46,7 +43,5 @@ class MappingControllerTest {
         ResponseEntity<String> result = restTemplate.getForEntity("/sequentialNumber/{hash}", String.class, "462ab7b6facbc241a2759897086eec320d74895f");
         String body = result.getBody();
         assertEquals("1", body);
-
     }
-
 }

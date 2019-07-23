@@ -1,7 +1,7 @@
 package mapper;
 
 import org.junit.jupiter.api.Test;
-import javax.inject.Inject;
+
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +23,8 @@ class MapperServiceTest {
             "  \"user_id\": 2924," +
             "  \"user_name\": \"henrik\"" +
             "}";
-        assertEquals("57fbc7941adb5241a2459699086efc321074795c", mapperService.getHash(s), "successfully created hash");
+        assertEquals("57fbc7941adb5241a2459699086efc321074795c", mapperService.getHash(s));
+        System.out.println("Test 1 passed\n");
     }
 
     @Test
@@ -65,5 +66,10 @@ class MapperServiceTest {
         mapperService.gitData(data1);
         mapperService.gitData(data2);
         mapperService.gitData(data3);
+
+        assertEquals(1, mapperService.sequentialNumber("17fbc7941adb5241a2459699086efc321074795c"));
+        assertEquals(2, mapperService.sequentialNumber("27fbc7941adb5241a2459699086efc321074795c"));
+        assertEquals(3, mapperService.sequentialNumber("37fbc7941adb5241a2459699086efc321074795c"));
+        System.out.println("Test 2 passed\n");
     }
 }

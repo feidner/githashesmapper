@@ -11,29 +11,35 @@ public class MapperService {
     private long nr = 1;
 
 
-    public void gitData(String data) throws IOException{
+    void gitData(String data) throws IOException {
         load();
         gitMap.put(getHash(data), nr);
         nr++;
         save();
     }
-    public Long sequentialNumber(String hash){
+
+    Long sequentialNumber(String hash) {
         return gitMap.get(hash);
     }
 
-    void save() throws IOException {
+    private void save() throws IOException {
         System.out.println("saving");
-        BufferedWriter bw = new BufferedWriter(new FileWriter("map.txt"));
-        String erg = "";
-        for(String key : gitMap.keySet()){
-            erg += (key + " " + gitMap.get(key) + "\n");
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("map.txt"))) {
+            StringBuilder erg = new StringBuilder();
+            for (String key : gitMap.keySet()) {
+                erg
+                        .append(key)
+                        .append(" ")
+                        .append(gitMap.get(key))
+                        .append("\n");
+            }
+            bw.write(erg.toString());
         }
-        bw.write(erg);
-        bw.close();
     }
-    void load() throws IOException {
+
+    private void load() throws IOException {
         System.out.println("loading");
-        try(BufferedReader br = new BufferedReader(new FileReader("map.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("map.txt"))) {
 
             for (String line = br.readLine(); line != null; line = br.readLine()) {
                 int leer = 0;
@@ -46,19 +52,19 @@ public class MapperService {
         }
     }
 
-    public String getHash(String s){
+    String getHash(String s) {
         System.out.println("creating hash");
         String erg = "";
-        for(int i = 0; i < s.length() - 5; i++){
-            if(s.substring(i, i+5).equals("after")) erg = s.substring(i+9, i+49);
+        for (int i = 0; i < s.length() - 5; i++) {
+            if (s.substring(i, i + 5).equals("after")) erg = s.substring(i + 9, i + 49);
         }
         return erg;
     }
 
-    public void clearFile() throws IOException{
+    void clearFile() throws IOException {
         System.out.println("clearing file");
-        BufferedWriter bw = new BufferedWriter(new FileWriter("map.txt"));
-        bw.write("");
-        bw.close();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("map.txt"))) {
+            bw.write("");
+        }
     }
 }

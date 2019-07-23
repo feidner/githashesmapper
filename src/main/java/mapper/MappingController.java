@@ -9,8 +9,11 @@ import java.io.IOException;
 @RestController
 public class MappingController {
 
-    @Inject
-    private MapperService mapperService;
+    private final MapperService mapperService;
+
+    public MappingController(MapperService mapperService) {
+        this.mapperService = mapperService;
+    }
 
     @RequestMapping(value = {"/sequentialNumber/{hash}"}, method = RequestMethod.GET)
     public Long sequentialNumber(@PathVariable(value = "hash") String hash) {

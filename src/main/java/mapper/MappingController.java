@@ -3,18 +3,25 @@ package mapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
+import java.io.IOException;
+
 @RestController
 public class MappingController {
 
-    @PostMapping(path= "/gitlab")
-    public void gitData(HttpEntity<String> requestEntity) {
-        System.out.println("gitData");
-        String gitLabJsonData = requestEntity.getBody();
-    }
+    @Inject
+    private MapperService mapperService;
 
     @RequestMapping(value = {"/sequentialNumber/{hash}"}, method = RequestMethod.GET)
-    public String squentialNumber(@PathVariable(value = "hash") String hash) {
-        System.out.println("squentialNumber");
-        return "murks";
+    public Long sequentialNumber(@PathVariable(value = "hash") String hash) {
+        System.out.println("sequentialNumber");
+        return mapperService.sequentialNumber(hash);
+    }
+
+    @PostMapping(path= "/gitlab")
+    public void gitData(HttpEntity<String> requestEntity) throws IOException {
+        System.out.println("gitData");
+        String gitLabJsonData = requestEntity.getBody();
+        mapperService.gitData(gitLabJsonData);
     }
 }

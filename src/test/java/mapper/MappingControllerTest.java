@@ -10,9 +10,11 @@ import javax.inject.Inject;
 import javax.ws.rs.client.Entity;
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.nio.charset.Charset;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = {GitLabHashMappingApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MappingControllerTest {
@@ -22,6 +24,8 @@ class MappingControllerTest {
 
     @Test
     void restController_SendGitLabJsonDataWithAfterHash_Then() {
+
+
         String gitLabPushEvent = "{" +
                 "  \"object_kind\": \"push\"," +
                 "  \"event_name\": \"push\"," +
@@ -42,6 +46,7 @@ class MappingControllerTest {
         ResponseEntity<String> result = restTemplate.getForEntity("/sequentialNumber/{hash}", String.class, "462ab7b6facbc241a2759897086eec320d74895f");
         String body = result.getBody();
         assertEquals("1", body);
+
     }
 
 }

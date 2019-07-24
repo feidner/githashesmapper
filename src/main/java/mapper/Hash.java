@@ -1,7 +1,8 @@
 package mapper;
 
 public class Hash {
-    private String hash, number;
+    private String hash;
+    private String number;
 
     public Hash(String key, Long number) {
         this.hash = key;

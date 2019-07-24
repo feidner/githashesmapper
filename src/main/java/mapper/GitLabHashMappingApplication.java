@@ -10,5 +10,6 @@ public class GitLabHashMappingApplication {
     public static void main(String[] args) {
         LogFactory.getLog(GitLabHashMappingApplication.class).info("START APPLICATION");
         SpringApplication.run(GitLabHashMappingApplication.class);
+
     }
 }

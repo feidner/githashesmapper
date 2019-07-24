@@ -1,6 +1,8 @@
 package mapper;
 
+import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.json.GsonTester;
 
 import java.io.IOException;
 
@@ -9,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class MapperServiceTest {
 
     private MapperService mapperService = new MapperService();
+
+
 
     @Test
     void test1() {
@@ -56,9 +60,9 @@ class MapperServiceTest {
             "  \"object_kind\": \"push\"," +
             "  \"event_name\": \"push\"," +
             "  \"before\": \"768b109afc290b10d7f7dc544b89cdf0ac0463c4\"," +
+            "  \"checkout_sha\": \"37fbc7941adb5241a2459699086efc321074795c\"," +
             "  \"after\": \"37fbc7941adb5241a2459699086efc321074795c\"," +
             "  \"ref\": \"refs/heads/master\"," +
-            "  \"checkout_sha\": \"37fbc7941adb5241a2459699086efc321074795c\"," +
             "  \"message\": null," +
             "  \"user_id\": 2924," +
             "  \"user_name\": \"henrik\"" +

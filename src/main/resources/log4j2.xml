@@ -2,8 +2,8 @@
 <Configuration>
 
     <Loggers>
-        <Root level="error">
-            <AppenderRef ref="RollingFile"/>
+        <Root level="info">
+            <AppenderRef ref="STDOUT"/>
         </Root>
     </Loggers>
 

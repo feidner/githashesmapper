@@ -1,6 +1,6 @@
 package mapper;
 
-import org.apache.logging.log4j.LogManager;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GitLabHashMappingApplication {
 
     public static void main(String[] args) {
-        LogManager.getLogger(GitLabHashMappingApplication.class.getSimpleName()).info("START APPLICATION");
+        LogFactory.getLog(GitLabHashMappingApplication.class).info("START APPLICATION");
         SpringApplication.run(GitLabHashMappingApplication.class);
     }
 }

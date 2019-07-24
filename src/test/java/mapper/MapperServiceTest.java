@@ -1,18 +1,14 @@
 package mapper;
 
-import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.json.GsonTester;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MapperServiceTest {
 
     private MapperService mapperService = new MapperService();
-
-
 
     @Test
     void test1() {

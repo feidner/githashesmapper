@@ -1,8 +1,19 @@
 package mapper;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Hash {
+    @Id
+    @Column
     private String hash;
     private String number;
+
+    public Hash(){
+
+    }
 
     public Hash(String key, Long number) {
         this.hash = key;

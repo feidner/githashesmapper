@@ -1,14 +1,10 @@
 package mapper;
 
-public class GitLabData {
+class GitLabData {
 
-    private String after;
+    private String after = "";
 
-    public String getAfter() {
+    String getAfter() {
         return after;
-    }
-
-    public void setAfter(String after) {
-        this.after = after;
     }
 }

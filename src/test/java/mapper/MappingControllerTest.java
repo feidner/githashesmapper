@@ -17,6 +17,9 @@ class MappingControllerTest {
     @Inject
     private MapperService mapperService;
 
+    @Inject
+    private DBMapperService dbMapperService;
+
     @Test
     void restController_SendGitLabJsonDataWithAfterHash_Then() throws IOException{
         mapperService.clearFile();
@@ -39,5 +42,25 @@ class MappingControllerTest {
         ResponseEntity<String> result = restTemplate.getForEntity("/sequentialNumber/{hash}", String.class, "462ab7b6facbc241a2759897086eec320d74895f");
         String body = result.getBody();
         assertEquals("1", body);
+    }
+
+    @Test
+    void dataBaseInsertTest(){
+        dbMapperService.deleteAll();
+        String gitLabPushEvent = "{" +
+                "  \"object_kind\": \"push\"," +
+                "  \"event_name\": \"push\"," +
+                "  \"before\": \"768b109afc290b10d7f7dc544b89cdf0ac0463c4\"," +
+                "  \"after\": \"462ab7b6facbc241a2759897086eec320d74895f\"," +
+                "  \"ref\": \"refs/heads/master\"," +
+                "  \"checkout_sha\": \"462ab7b6facbc241a2759897086eec320d74895f\"," +
+                "  \"message\": null," +
+                "  \"user_id\": 2924," +
+                "  \"user_name\": \"henrik\"" +
+                "}";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(gitLabPushEvent, headers);
+        restTemplate.exchange("/db", HttpMethod.POST, entity, String.class);
     }
 }

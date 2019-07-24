@@ -2,7 +2,7 @@ package mapper;
 
 class GitLabData {
 
-    private String after = "";
+    private String after;
 
     String getAfter() {
         return after;

@@ -33,7 +33,7 @@ public class MappingController {
     @GetMapping(path= "/db")
     public void insert(HttpEntity<String> requestEntity) {
         GitLabData o = new Gson().fromJson(requestEntity.getBody(), GitLabData.class);
-        String hash = o.getAfter();
+        String hash = o.getAfter(); //TODO fix NullpointerException
         Long number = mapperService.sequentialNumber(hash);
         dbMapperService.save(new Hash(hash, number));
     }

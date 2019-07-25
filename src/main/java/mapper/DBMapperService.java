@@ -2,12 +2,13 @@ package mapper;
 
 import org.springframework.data.repository.CrudRepository;
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 @Resource(name = "DBMapperService")
 public interface DBMapperService extends CrudRepository<Hash, String>, MapperInterface{
-    Map<String, Long> gitMap = new HashMap<>();
+    List<Long> lst = new ArrayList<>();
 
     @Override
     default void gitData(String data) {
@@ -22,6 +23,12 @@ public interface DBMapperService extends CrudRepository<Hash, String>, MapperInt
     }
 
     default Long hoechsteNummer(){
-        return (count() + 1);
+        findAll().forEach(value -> lst.add(value.getNumber()));
+        if (lst.size() > 0) {
+            lst.sort(Comparator.naturalOrder());
+            return lst.get(lst.size() - 1);
+        } else {
+            return 1L;
+        }
     }
 }

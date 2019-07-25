@@ -3,12 +3,24 @@ package mapper;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "hash")
 public class Hash {
     @Id
-    @Column
+    @Column(
+        name="hash",
+        nullable=false,
+        length=40
+    )
     private String hash;
+
+    @Column(
+        name="number",
+        nullable=false,
+        length=20
+    )
     private Long number;
 
     public Hash(){

@@ -13,13 +13,17 @@ public interface DBMapperService extends CrudRepository<Hash, String>, MapperInt
     @Override
     default void gitData(String data) {
         String hash = MapperService.getHash(data);
-        Long number = sequentialNumber(hash);
+        Long number = getSequentialNumber(hash);
         save(new Hash(hash, number));
     }
 
     @Override
     default Long sequentialNumber(String hash) {
-        return findById(hash).map(Hash::getNumber).orElse(hoechsteNummer());
+        return findById(hash).map(Hash::getNumber).orElse(-1L);
+    }
+
+    default Long getSequentialNumber(String hash){
+        return findById(hash).map(Hash::getNumber).orElse(hoechsteNummer() + 1);
     }
 
     default Long hoechsteNummer(){

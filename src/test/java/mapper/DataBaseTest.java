@@ -10,5 +10,7 @@ class DataBaseTest {
     void test() throws ManagedProcessException {
         DB db = DB.newEmbeddedDB(0);
         db.start();
+        db.createDB("hash");
+
     }
 }

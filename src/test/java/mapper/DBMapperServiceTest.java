@@ -30,7 +30,7 @@ class DBMapperServiceTest {
 
     @Test
     void sequentialNumber_InsertSomeDataSetsAndSaveVaderWithNumber4000AndAddNewDataSet_ThenNewDataSetHasNumber4001() {
-        Hash hash = service.findById("vader").get();
+        Hash hash = service.findById("vader").orElseThrow();
         service.save(new Hash(hash.getHash(), 4000L));
         service.gitData("{ \"after\": \"jabba\" }");
         assertEquals(4001L, service.sequentialNumber("jabba"));

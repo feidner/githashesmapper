@@ -9,21 +9,21 @@ public class Hash {
     @Id
     @Column
     private String hash;
-    private String number;
+    private Long number;
 
     public Hash(){
     }
 
     Hash(String key, Long number) {
         this.hash = key;
-        this.number = String.valueOf(number);
+        this.number = number;
     }
 
-    String getNumber() {
+    Long getNumber() {
         return number;
     }
 
-    void setNumber(String number) {
+    void setNumber(Long number) {
         this.number = number;
     }
 

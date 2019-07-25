@@ -6,8 +6,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import javax.inject.Inject;
 import java.io.IOException;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = {GitLabHashMappingApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MappingControllerTest {
@@ -62,9 +62,8 @@ class MappingControllerTest {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(gitLabPushEvent, headers);
-        restTemplate.exchange("/db", HttpMethod.GET, entity, String.class);
-
-        /*restTemplate.getForEntity("/db", String.class);   TODO fix test
-        assertTrue(dbMapperService.existsById("462ab7b6facbc241a2759897086eec320d74895f"));*/
+        ResponseEntity<String> result = restTemplate.exchange("/gitlab", HttpMethod.POST, entity, String.class);
+        assertSame(result.getStatusCode(), HttpStatus.OK);
+        assertTrue(dbMapperService.existsById("462ab7b6facbc241a2759897086eec320d74895f"));
     }
 }

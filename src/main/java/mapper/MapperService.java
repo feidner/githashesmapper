@@ -3,13 +3,15 @@ package mapper;
 import com.google.gson.Gson;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
+import javax.annotation.Resource;
 import javax.inject.Named;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Named
-public class MapperService {
+@Resource(name = "MapperService")
+public class MapperService implements MapperInterface{
     private Map<String, Long> gitMap = new HashMap<>();
     private long number;
 
@@ -17,13 +19,15 @@ public class MapperService {
         load();
     }
 
-    void gitData(String data) throws IOException {
+    @Override
+    public void gitData(String data) throws IOException {
         number++;
         gitMap.put(getHash(data), number);
         save();
     }
 
-    Long sequentialNumber(String hash) {
+    @Override
+    public Long sequentialNumber(String hash) {
         return gitMap.get(hash);
     }
 
@@ -39,12 +43,12 @@ public class MapperService {
 
         Hashes hashes = new Gson().fromJson(ss, Hashes.class);
         hashes = hashes == null ? new Hashes(new ArrayList<>()) : hashes;
-        hashes.getHashes().forEach(hash -> gitMap.put(hash.getHash(), Long.parseLong(hash.getNumber())));
+        hashes.getHashes().forEach(hash -> gitMap.put(hash.getHash(), hash.getNumber()));
         number = gitMap.values().stream().max(Comparator.naturalOrder()).orElse(0L);
     }
 
-    String getHash(String s) {
-        LogManager.getLogger(getClass().getSimpleName()).info("creating hash");
+    static String getHash(String s) {
+        LogManager.getLogger(MapperService.class.getSimpleName()).info("creating hash");
         GitLabData o = new Gson().fromJson(s, GitLabData.class);
         return o.getAfter();
     }

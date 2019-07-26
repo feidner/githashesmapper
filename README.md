@@ -3,6 +3,7 @@
 Softwareentwicklung:<br>
 GIT - Quellcodeverwaltung<br>
 Intellij IDE - Entwicklungsumgebung<br>
+Merging mit der IDE
 Jenkins (Testautomatisierung, Deployment)<br>
 Maven - Buildsystem<br>
 

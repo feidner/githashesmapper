@@ -1,24 +1,24 @@
 # githashesmapper
 
 Softwareentwicklung:<br>
-GIT - Quellcodeverwaltung
-Intellij IDE - Entwicklungsumgebung
-Jenkins (Testautomatisierung, Deployment)
-Maven - Buildsystem
+GIT - Quellcodeverwaltung<br>
+Intellij IDE - Entwicklungsumgebung<br>
+Jenkins (Testautomatisierung, Deployment)<br>
+Maven - Buildsystem<br>
 
-Programmierung:
-Mehrere Implementierungen für ein Interface
-Injection
-Logging
-Datenbank
-Tests – TDD(TestDrivenDevelopment)
-InMemory Datenbank bei Tests verwenden
+Programmierung:<br>
+Mehrere Implementierungen für ein Interface<br>
+Injection<br>
+Logging<br>
+Datenbank<br>
+Tests – TDD(TestDrivenDevelopment)<br>
+InMemory Datenbank bei Tests verwenden<br>
 
-Alles rund um Java:
-SpringBoot – Container
-REST – Services in  Spring
-CRUD – Create-Read-Update-Delete in Spring
-JPA – Java Persistence Api
-Swing – UI: Menü, Tabelle
-Datenbankanbindung mit Spring
-Dateihandling
+Alles rund um Java:<br>
+SpringBoot – Container<br>
+REST – Services in  Spring<br>
+CRUD – Create-Read-Update-Delete in Spring<br>
+JPA – Java Persistence Api<br>
+Swing – UI: Menü, Tabelle<br>
+Datenbankanbindung mit Spring<br>
+Dateihandling<br>

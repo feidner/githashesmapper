@@ -19,6 +19,7 @@ SpringBoot – Container<br>
 REST – Services in  Spring<br>
 CRUD – Create-Read-Update-Delete in Spring<br>
 JPA – Java Persistence Api<br>
+Java-Collection-Streams -> Lambda-Ausdrücke
 Swing – UI: Menü, Tabelle<br>
 Datenbankanbindung mit Spring<br>
 Dateihandling<br>

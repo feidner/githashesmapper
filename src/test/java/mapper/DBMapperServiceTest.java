@@ -54,7 +54,7 @@ class DBMapperServiceTest {
             }
             long finalSmallest = smallest;
             int finalI = i;
-            assertTrue(smallest == -1 || (diff - smallest) < (3*smallest),
+            assertTrue(smallest == -1 || (diff - smallest) < (10*smallest),
                     () -> String.format("Das Abspeichern dauert nun 3mal so lange .... %s: smallest: %s, diff: %s", finalI, finalSmallest, diff));
             if(smallest == -1 || diff < smallest) {
                 smallest = diff;

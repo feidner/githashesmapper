@@ -19,7 +19,8 @@ public class Hash {
     @Column(
         name="number",
         nullable=false,
-        length=20
+        length=20,
+        unique = true
     )
     private Long number;
 

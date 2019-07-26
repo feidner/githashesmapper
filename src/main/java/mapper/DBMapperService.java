@@ -1,9 +1,9 @@
 package mapper;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Resource(name = "DBMapperService")
@@ -13,7 +13,7 @@ public interface DBMapperService extends CrudRepository<Hash, String>, MapperInt
     @Override
     default void gitData(String data) {
         String hash = MapperService.getHash(data);
-        Long number = getSequentialNumber(hash);
+        Long number = getNextSequentialNumber(hash);
         save(new Hash(hash, number));
     }
 
@@ -22,17 +22,13 @@ public interface DBMapperService extends CrudRepository<Hash, String>, MapperInt
         return findById(hash).map(Hash::getNumber).orElse(-1L);
     }
 
-    default Long getSequentialNumber(String hash){
-        return findById(hash).map(Hash::getNumber).orElse(hoechsteNummer() + 1);
+    default Long getNextSequentialNumber(String hash){
+        return findById(hash).map(Hash::getNumber).orElseGet(() -> {
+            Long hoechste = hoechsteNummer();
+            return hoechste == null ? 1 : (hoechste +1);
+        });
     }
 
-    default Long hoechsteNummer(){
-        findAll().forEach(value -> lst.add(value.getNumber()));
-        if (lst.size() > 0) {
-            lst.sort(Comparator.naturalOrder());
-            return lst.get(lst.size() - 1);
-        } else {
-            return 1L;
-        }
-    }
+    @Query(value = "select max(number) from hash", nativeQuery = true)
+    Long hoechsteNummer();
 }

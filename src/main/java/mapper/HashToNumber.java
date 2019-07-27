@@ -6,32 +6,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "hash")
-public class Hash {
-    @Id
-    @Column(
-        name="hash",
-        nullable=false,
-        length=40
-    )
-    private String hash;
+@Table(name = "hash_to_number")
+public class HashToNumber {
 
-    @Column(
-        name="number",
-        nullable=false,
-        length=20,
-        unique = true
-    )
+    private String hash;
     private Long number;
 
-    public Hash(){
+    public HashToNumber(){
     }
 
-    Hash(String key, Long number) {
+    HashToNumber(String key, Long number) {
         this.hash = key;
         this.number = number;
     }
 
+    @Column(
+            name="number",
+            nullable=false,
+            length=20,
+            unique = true
+    )
     Long getNumber() {
         return number;
     }
@@ -40,6 +34,12 @@ public class Hash {
         this.number = number;
     }
 
+    @Id
+    @Column(
+            name="hash",
+            nullable=false,
+            length=40
+    )
     String getHash() {
         return hash;
     }

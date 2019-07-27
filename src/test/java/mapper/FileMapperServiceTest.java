@@ -9,13 +9,13 @@ import java.util.Comparator;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MapperServiceTest {
+class FileMapperServiceTest {
 
-    private MapperService mapperService;
+    private FileMapperService mapperService;
 
     @BeforeEach
     void setup() throws IOException {
-        mapperService = new MapperService();
+        mapperService = new FileMapperService();
     }
 
     @Test
@@ -78,9 +78,9 @@ class MapperServiceTest {
             "  \"user_id\": 2924," +
             "  \"user_name\": \"henrik\"" +
             "}";
-        mapperService.gitData(data1);
-        mapperService.gitData(data2);
-        mapperService.gitData(data3);
+        mapperService.saveGitLabData(data1);
+        mapperService.saveGitLabData(data2);
+        mapperService.saveGitLabData(data3);
 
         assertEquals(1, mapperService.sequentialNumber("17fbc7941adb5241a2459699086efc321074795c"));
         assertEquals(2, mapperService.sequentialNumber("27fbc7941adb5241a2459699086efc321074795c"));

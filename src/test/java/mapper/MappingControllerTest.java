@@ -16,7 +16,7 @@ class MappingControllerTest {
     private TestRestTemplate restTemplate;
 
     @Inject
-    private MapperService mapperService;
+    private FileMapperService mapperService;
 
     @Inject
     private DBMapperService dbMapperService;

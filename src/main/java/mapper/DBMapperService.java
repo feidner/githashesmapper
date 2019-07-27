@@ -2,33 +2,30 @@ package mapper;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 @Resource(name = "DBMapperService")
-public interface DBMapperService extends CrudRepository<Hash, String>, MapperInterface{
-    List<Long> lst = new ArrayList<>();
-
+public interface DBMapperService extends CrudRepository<HashToNumber, String>, MapperService {
     @Override
-    default void gitData(String data) {
-        String hash = MapperService.getHash(data);
+    default void saveGitLabData(String gitLabData) {
+        String hash = FileMapperService.getHash(gitLabData);
         Long number = getNextSequentialNumber(hash);
-        save(new Hash(hash, number));
+        save(new HashToNumber(hash, number));
     }
 
     @Override
     default Long sequentialNumber(String hash) {
-        return findById(hash).map(Hash::getNumber).orElse(-1L);
+        return findById(hash).map(HashToNumber::getNumber).orElse(-1L);
     }
 
     default Long getNextSequentialNumber(String hash){
-        return findById(hash).map(Hash::getNumber).orElseGet(() -> {
-            Long hoechste = hoechsteNummer();
-            return hoechste == null ? 1 : (hoechste +1);
+        return findById(hash).map(HashToNumber::getNumber).orElseGet(() -> {
+            Long maxNumber = maxNumber();
+            return maxNumber == null ? 1 : (maxNumber +1);
         });
     }
 
-    @Query(value = "select max(number) from hash", nativeQuery = true)
-    Long hoechsteNummer();
+    @Query(value = "select max(number) from hash_to_number", nativeQuery = true)
+    Long maxNumber();
 }

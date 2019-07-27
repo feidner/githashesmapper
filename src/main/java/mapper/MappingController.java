@@ -11,9 +11,9 @@ import java.io.IOException;
 public class MappingController {
 
     @Named
-    private MapperInterface mapperInterface;
+    private MapperService mapperInterface;
 
-    public MappingController(@Qualifier("DBMapperService") MapperInterface mapperInterface) {
+    public MappingController(@Qualifier("DBMapperService") MapperService mapperInterface) {
         this.mapperInterface = mapperInterface;
     }
 
@@ -27,6 +27,6 @@ public class MappingController {
     public void gitData(HttpEntity<String> requestEntity) throws IOException {
         LogManager.getLogger(getClass().getSimpleName()).info("gitData");
         String gitLabJsonData = requestEntity.getBody();
-        mapperInterface.gitData(gitLabJsonData);
+        mapperInterface.saveGitLabData(gitLabJsonData);
     }
 }

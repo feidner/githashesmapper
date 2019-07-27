@@ -21,9 +21,9 @@ class DBMapperServiceTest {
     @BeforeEach
     void setup() {
         service.deleteAll();
-        service.gitData("{ \"after\": \"vader\" }");
-        service.gitData("{ \"after\": \"hansolo\" }");
-        service.gitData("{ \"after\": \"luke\" }");
+        service.saveGitLabData("{ \"after\": \"vader\" }");
+        service.saveGitLabData("{ \"after\": \"hansolo\" }");
+        service.saveGitLabData("{ \"after\": \"luke\" }");
     }
 
     @Test
@@ -34,30 +34,33 @@ class DBMapperServiceTest {
 
     @Test
     void sequentialNumber_InsertSomeDataSetsAndSaveVaderWithNumber4000AndAddNewDataSet_ThenNewDataSetHasNumber4001() {
-        Hash hash = service.findById("vader").orElseThrow();
-        service.save(new Hash(hash.getHash(), 4000L));
-        service.gitData("{ \"after\": \"jabba\" }");
+        HashToNumber hash = service.findById("vader").orElseThrow();
+        service.save(new HashToNumber(hash.getHash(), 4000L));
+        service.saveGitLabData("{ \"after\": \"jabba\" }");
         assertEquals(4001L, service.sequentialNumber("jabba"));
     }
 
     @Test
     void sequentialNumber_InsertMassiveDataSets_ThenSaveTimeDontExceed() {
-        org.apache.logging.log4j.core.Logger logger = (Logger) LogManager.getLogger(MapperService.class.getSimpleName());
+        org.apache.logging.log4j.core.Logger logger = (Logger) LogManager.getLogger(FileMapperService.class.getSimpleName());
         logger.setLevel(Level.WARN);
-        long smallest = -1;
+        long smallest = -1, allTime = 0L;
         for (int i = 4; i < 1999; i++) {
-            long millis = System.currentTimeMillis();
-            service.gitData(String.format("{ \"after\": \"jabba_%s\" }", i));
-            long diff = System.currentTimeMillis() - millis;
+            long saveTime = System.currentTimeMillis();
+            service.saveGitLabData(String.format("{ \"after\": \"jabba_%s\" }", i));
+            saveTime = System.currentTimeMillis() - saveTime;
+            allTime += saveTime;
+            long averageTime = allTime/(i-3);
             if(i % 100 == 0) {
-                LogManager.getLogger(getClass().getSimpleName()).info(String.format("%s: smallest: %s, diff: %s", i, smallest, diff));
+                LogManager.getLogger(getClass().getSimpleName()).info(String.format("%s: smallest: %s, averageTime: %s, saveTime: %s",
+                        i, smallest, averageTime, saveTime));
             }
             long finalSmallest = smallest;
             int finalI = i;
-            assertTrue(smallest == -1 || (diff - smallest) < (10*smallest),
-                    () -> String.format("Das Abspeichern dauert nun 3mal so lange .... %s: smallest: %s, diff: %s", finalI, finalSmallest, diff));
-            if(smallest == -1 || diff < smallest) {
-                smallest = diff;
+            assertTrue(smallest == -1 || (averageTime - smallest) < (3*smallest),
+                    () -> String.format("Das Abspeichern dauert nun 3mal so lange .... %s: smallest: %s, averageTime: %s", finalI, finalSmallest, averageTime));
+            if(smallest == -1 || saveTime < smallest) {
+                smallest = saveTime;
             }
         }
     }

@@ -8,9 +8,9 @@
     <version>1</version>
 
     <properties>
-        <groupId/>
-        <artifactId/>
-        <version/>
+        <groupId>hfe</groupId>
+        <artifactId>git-hashes-mapper</artifactId>
+        <version>1-SNAPSHOT</version>
     </properties>
 
     <dependencies>
@@ -32,18 +32,12 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.6.0</version>
-                    <executions>
-                        <execution>
-                            <id>start</id>
-                            <configuration>
-                                <mainClass>org.springframework.boot.loader.JarLauncher</mainClass>
-                                <!--commandlineArgs>-Xms2g -Xmx4g</commandlineArgs-->
-                            </configuration>
-                        </execution>
-                    </executions>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.1.6.RELEASE</version>
+                    <configuration>
+                        <mainClass>org.springframework.boot.loader.JarLauncher</mainClass>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

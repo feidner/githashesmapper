@@ -9,7 +9,7 @@
 
     <properties>
         <groupId>hfe</groupId>
-        <artifactId>git-hashes-mapper</artifactId>
+        <artifactId>git-hash-to-sequential-number</artifactId>
         <version>1-SNAPSHOT</version>
     </properties>
 

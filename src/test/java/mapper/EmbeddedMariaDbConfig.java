@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Profile;
 import javax.sql.DataSource;
 
 @Configuration
-@Profile({"test"})
+@Profile({"test", "create"})
 class EmbeddedMariaDbConfig {
 
     @Bean

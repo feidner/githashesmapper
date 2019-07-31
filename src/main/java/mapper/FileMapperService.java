@@ -2,10 +2,12 @@ package mapper;
 
 import com.google.gson.Gson;
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
+import org.apache.commons.logging.LogFactory;
+
 import javax.annotation.Resource;
 import javax.inject.Named;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,13 +35,13 @@ public class FileMapperService implements MapperService {
     }
 
     private void save() throws IOException {
-        LogManager.getLogger(getClass().getSimpleName()).info("saving");
+        LogFactory.getLog(getClass().getSimpleName()).info("saving");
         List<HashToNumber> hashes = gitMap.keySet().stream().map(key -> new HashToNumber(key, gitMap.get(key))).collect(Collectors.toList());
         FileUtils.writeStringToFile(FileUtils.getFile(FILE_NAME), new Gson().toJson(new HashToNumbers(hashes)), (String)null);
     }
 
     private void load() throws IOException {
-        LogManager.getLogger(getClass().getSimpleName()).info("loading");
+        LogFactory.getLog(getClass().getSimpleName()).info("loading");
         File contentFile = FileUtils.getFile(FILE_NAME);
         if(contentFile.exists()) {
             String fileContent = FileUtils.readFileToString(contentFile, (String) null);
@@ -55,7 +57,7 @@ public class FileMapperService implements MapperService {
     }
 
     void clearFile() {
-        LogManager.getLogger(getClass().getSimpleName()).info("clearing file");
+        LogFactory.getLog(getClass().getSimpleName()).info("clearing file");
         FileUtils.deleteQuietly(FileUtils.getFile(FILE_NAME));
         maximumNumber = 0;
     }

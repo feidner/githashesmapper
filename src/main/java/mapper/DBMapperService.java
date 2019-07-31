@@ -1,5 +1,6 @@
 package mapper;
 
+import org.apache.commons.logging.LogFactory;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -11,6 +12,7 @@ public interface DBMapperService extends CrudRepository<HashToNumber, String>, M
     default void saveGitLabData(String gitLabData) {
         String hash = FileMapperService.getHash(gitLabData);
         Long number = getNextSequentialNumber(hash);
+        LogFactory.getLog(getClass().getSimpleName()).info(String.format("save to DB: %s/%s", hash, number));
         save(new HashToNumber(hash, number));
     }
 

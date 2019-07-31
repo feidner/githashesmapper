@@ -25,8 +25,8 @@ public class MappingController {
 
     @PostMapping(path= "/gitlab")
     public void gitData(HttpEntity<String> requestEntity) throws IOException {
-        LogManager.getLogger(getClass().getSimpleName()).info("gitData");
         String gitLabJsonData = requestEntity.getBody();
+        LogManager.getLogger(getClass().getSimpleName()).info(String.format("gitData: %s", gitLabJsonData));
         mapperInterface.saveGitLabData(gitLabJsonData);
     }
 }
